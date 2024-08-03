@@ -43,8 +43,7 @@ demoQDServer <- function(id, global) {
         # copy qd to main directory
         copy_docs_to_project(main_dir = global$main_dir, 
                              paths = qd_paths, 
-                             names = qd_names, 
-                             type = "questioned")
+                             subfolder = "questioned_docs")
         
         # get filepaths and names from main_dir > data > questioned_docs folder
         global$qd_paths <- list_docs(global$main_dir, type = "questioned", filepaths = TRUE)

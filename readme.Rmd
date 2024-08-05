@@ -4,13 +4,6 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<style type="text/css">
-  p{
-  font-size: 12pt;
-  color: red
-}
-</style>
-
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,

@@ -1,11 +1,5 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<style type="text/css">
-  p{
-  font-size: 12pt;
-  color: red
-}
-</style>
 
 # Quick Start
 

@@ -1,17 +1,24 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+<style type="text/css">
+  body{
+  font-size: 12pt;
+  color: red
+}
+</style>
 
 # Quick Start
 
 <!-- badges: start -->
 <!-- badges: end -->
-
+<p style="font-family: times, serif; font-size:11pt; font-style:italic">
 Handwriter is designed to assist forensic examiners by analyzing
 handwritten documents against a closed set of potential writers. It
 determines the probability that each writer wrote the document. Whether
 you are a forensic document examiner, legal professional, academic, or
 simply curious about how statistics are applied to handwriting,
 handwriter provides an automated way to evaluate handwriting samples.
+</p>
 
 ``` r
 summary(cars)

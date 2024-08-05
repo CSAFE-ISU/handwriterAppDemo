@@ -24,16 +24,23 @@
 #'
 #' @param main_dir A filepath to the project folder
 #' @param paths The filepaths of the writing samples
-#' @param names The filenames of the writing samples
-#' @param type Either "model" or "questioned"
+#' @param subfolder (optional) Subfolder name within data folder
 #'
 #' @return NULL
 #'
 #' @noRd
-copy_docs_to_project <- function(main_dir, paths, names, type = "model"){
-  lapply(1:length(paths), function(i) {
-    file.copy(paths[i], file.path(main_dir, "data", paste0(type, "_docs"), names[i]))}
-  )
+copy_docs_to_project <- function(main_dir, paths, subfolder = NULL){
+  names <- basename(paths)
+  
+  if (!is.null(subfolder)){
+    lapply(1:length(paths), function(i) {
+      file.copy(paths[i], file.path(main_dir, "data", subfolder, names[i]))}
+    )
+  } else {
+    lapply(1:length(paths), function(i) {
+      file.copy(paths[i], file.path(main_dir, "data", names[i]))
+    })
+  }
 }
 
 #' Create a Directory
@@ -210,4 +217,11 @@ setup_main_dir <- function(main_dir){
     # handwriter requires template.rds to exist in main_dir > data
     load("data/templateK8.rda")
     saveRDS(templateK8, file.path(main_dir, "data", "template.rds"))
+    
+    # copy model graphs and clusters to main_dir > data to save processing time
+    model_graphs <- list.files(file.path("data", "model_graphs"), full.names = TRUE)
+    model_clusters <- list.files(file.path("data", "model_clusters"), full.names = TRUE)
+    copy_docs_to_project(main_dir, paths = model_graphs, subfolder = "model_graphs")
+    copy_docs_to_project(main_dir, paths = model_clusters, subfolder = "model_clusters")
+    copy_docs_to_project(main_dir, paths = file.path("data", "model_clusters.rds"), subfolder = NULL)
 }

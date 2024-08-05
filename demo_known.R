@@ -48,8 +48,7 @@ demoKnownServer <- function(id, global) {
         # copy known docs to temp directory > data > model_docs
         copy_docs_to_project(main_dir = global$main_dir, 
                              paths = known_paths, 
-                             names = known_names,
-                             type = "model")
+                             subfolder = "model_docs")
         
         # list known filepaths
         global$known_paths <- list_docs(global$main_dir, type = "model", filepaths = TRUE)

@@ -1,13 +1,5 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<style type="text/css">
-  body {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    color: #545859;
-  }
-</style>
 
 # Quick Start
 

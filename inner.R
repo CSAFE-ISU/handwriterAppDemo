@@ -37,8 +37,9 @@ innerUI <- function(id) {
                                                                                        ns = shiny::NS(id),
                                                                                        shiny::div(id = "autonomous",
                                                                                                   shiny::includeHTML("www/demo_preview.html"),
-                                                                                                  shiny::fluidRow(shiny::column(width = 3, shiny::actionButton(ns("demo_preview_back_button"), "Back")), 
-                                                                                                                  shiny::column(width = 9, align = "right", shiny::actionButton(ns("demo_preview_next_button"), "Next")))
+                                                                                                  shiny::fluidRow(
+                                                                                                    # shiny::column(width = 3, shiny::actionButton(ns("demo_preview_back_button"), "Back")), 
+                                                                                                    shiny::column(width = 9, shiny::actionButton(ns("demo_preview_next_button"), "Next")))
                                                                                        ),
                                                                ),
                                                                
@@ -50,8 +51,9 @@ innerUI <- function(id) {
                                                                                                                  help_text = "Estimate writer profiles from the known writing samples and fit a statistical model to the writer profiles.",
                                                                                                                  module = demoKnownSidebarUI(ns("demo_known")),
                                                                                                                  break_after_module = TRUE),
-                                                                                                  shiny::fluidRow(shiny::column(width = 3, shiny::actionButton(ns("demo_known_back_button"), "Back")), 
-                                                                                                                  shiny::column(width = 9, align = "right", shiny::actionButton(ns("demo_known_next_button"), "Next")))
+                                                                                                  shiny::fluidRow(
+                                                                                                    # shiny::column(width = 3, shiny::actionButton(ns("demo_known_back_button"), "Back")), 
+                                                                                                    shiny::column(width = 9, shiny::actionButton(ns("demo_known_next_button"), "Next")))
                                                                                        ),
                                                                ),
                                                                
@@ -63,8 +65,9 @@ innerUI <- function(id) {
                                                                                                                  help_text = "Estimate writer profiles from the questioned documents. Use the statistical model to estimate the posterior probabilities that each POI wrote a questioned document.",
                                                                                                                  module = demoQDSidebarUI(ns("demo_qd")),
                                                                                                                  break_after_module = TRUE),
-                                                                                                  shiny::fluidRow(shiny::column(width = 3, shiny::actionButton(ns("demo_qd_back_button"), "Back")),
-                                                                                                                  shiny::column(width = 9, align = "right", shiny::actionButton(ns("demo_qd_next_button"), "Finish")))
+                                                                                                  shiny::fluidRow(
+                                                                                                    # shiny::column(width = 3, shiny::actionButton(ns("demo_qd_back_button"), "Back")),
+                                                                                                    shiny::column(width = 9, shiny::actionButton(ns("demo_qd_next_button"), "Finish")))
                                                                                        ),
                                                                ),
                         

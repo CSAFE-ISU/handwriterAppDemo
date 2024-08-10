@@ -26,7 +26,7 @@ demoQDSidebarUI <- function(id) {
 demoQDBodyUI <- function(id){
   ns <- shiny::NS(id)
   shiny::tagList(
-    shinycssloaders::withSpinner(shiny::uiOutput(ns("qd_results"))),
+    shiny::uiOutput(ns("qd_results")),
     currentImageUI(ns("demo_qd"))
   )
 }

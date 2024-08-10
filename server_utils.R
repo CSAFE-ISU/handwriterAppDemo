@@ -22,14 +22,14 @@
 #' model_docs or main_dir > data > questioned_docs so that all documents used in
 #' the analysis are stored in the project folder.
 #'
-#' @param main_dir A filepath to the project folder
 #' @param paths The filepaths of the writing samples
+#' @param main_dir A filepath to the project folder
 #' @param subfolder (optional) Subfolder name within data folder
 #'
 #' @return NULL
 #'
 #' @noRd
-copy_docs_to_project <- function(main_dir, paths, subfolder = NULL){
+copy_docs_to_project <- function(paths, main_dir, subfolder = NULL){
   names <- basename(paths)
   
   if (!is.null(subfolder)){
@@ -164,8 +164,8 @@ make_posteriors_df <- function(analysis){
   # Format posterior probabilities as percentage
   qd_columns <- colnames(df)[-1]
   df <- df %>% tidyr::pivot_longer(cols = tidyr::all_of(qd_columns), 
-                             names_to = "qd", 
-                             values_to = "post_probs")
+                                   names_to = "qd", 
+                                   values_to = "post_probs")
   df <- df %>% dplyr::mutate(post_probs = paste0(100*post_probs, "%"))
   df <- df %>% tidyr::pivot_wider(names_from = "qd", values_from = "post_probs")
   
@@ -179,7 +179,8 @@ make_posteriors_df <- function(analysis){
 #' 
 #' Reset the global reactive values.
 #'
-#' @param global 
+#' @param global
+#' @param local 
 #'
 #' @return NULL
 #'
@@ -208,20 +209,26 @@ reset_app <- function(global) {
 #'
 #' @noRd
 setup_main_dir <- function(main_dir){
-    # create directory structure in main directory
-    create_dir(file.path(main_dir, "data"))
-    create_dir(file.path(main_dir, "data", "questioned_docs"))
-    create_dir(file.path(main_dir, "data", "questioned_graphs"))
-    create_dir(file.path(main_dir, "data", "model_docs"))
-    
-    # handwriter requires template.rds to exist in main_dir > data
-    load("data/templateK8.rda")
-    saveRDS(templateK8, file.path(main_dir, "data", "template.rds"))
-    
-    # copy model graphs and clusters to main_dir > data to save processing time
-    model_graphs <- list.files(file.path("data", "model_graphs"), full.names = TRUE)
-    model_clusters <- list.files(file.path("data", "model_clusters"), full.names = TRUE)
-    copy_docs_to_project(main_dir, paths = model_graphs, subfolder = "model_graphs")
-    copy_docs_to_project(main_dir, paths = model_clusters, subfolder = "model_clusters")
-    copy_docs_to_project(main_dir, paths = file.path("data", "model_clusters.rds"), subfolder = NULL)
+  # create directory structure in main directory
+  create_dir(file.path(main_dir, "data"))
+  dirs <- c("model_docs", "model_graphs", "model_clusters", "questioned_docs", "questioned_graphs", "questioned_clusters")
+  lapply(dirs, function(d) create_dir(file.path(main_dir, "data", d)))
+  
+  # handwriter requires template.rds to exist in main_dir > data
+  load("data/templateK40.rda")
+  saveRDS(templateK40, file.path(main_dir, "data", "template.rds"))
+  
+  # copy model graphs and clusters to main_dir > data to save processing time
+  model_graphs <- list.files(file.path("data", "model_graphs"), full.names = TRUE)
+  model_clusters <- list.files(file.path("data", "model_clusters"), full.names = TRUE)
+  copy_docs_to_project(paths = model_graphs, main_dir = main_dir, subfolder = "model_graphs")
+  copy_docs_to_project(paths = model_clusters, main_dir = main_dir,  subfolder = "model_clusters")
+  copy_docs_to_project(paths = file.path("data", "model_clusters.rds"), main_dir = main_dir, subfolder = NULL)
+  
+  # copy questioned graphs and clusters to main_dir > data to save processing time
+  questioned_graphs <- list.files(file.path("data", "questioned_graphs"), full.names = TRUE)
+  questioned_clusters <- list.files(file.path("data", "questioned_clusters"), full.names = TRUE)
+  copy_docs_to_project(paths = questioned_graphs, main_dir = main_dir, subfolder = "questioned_graphs")
+  copy_docs_to_project(paths = questioned_clusters, main_dir = main_dir,  subfolder = "questioned_clusters")
+  copy_docs_to_project(paths = file.path("data", "questioned_clusters.rds"), main_dir = main_dir, subfolder = NULL)
 }

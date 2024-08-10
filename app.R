@@ -26,17 +26,14 @@ library(shinyjs)
 library(stringr)
 library(tidyr)
 
-
 source("current_image.R")
 source("demo_known.R")
 source("demo_preview.R")
 source("demo_qd.R")
-source("globals.R")
 source("inner.R")
 source("server_utils.R")
 source("ui_utils.R")
 
-# load("data/templateK8.rda")
 
 options(shiny.maxRequestSize = 30*1024^2)
 shiny::addResourcePath("www", "www")
